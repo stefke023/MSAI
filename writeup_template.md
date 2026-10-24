@@ -22,7 +22,7 @@ The goals / steps of this project are the following:
 [image1]: ./output_images/undistort_output.png "Undistorted"
 [image2]: ./output_images/undistorted_test1.jpg "Road Transformed"
 [image3]: ./output_images/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
+[image4]: ./output_images/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
@@ -72,7 +72,14 @@ A pixel is set to 1 if either condition is true:
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-TODO: Add your text here!!!
+For this step I wrote `src/perspective.py`.
+On the `straight_lines1.jpg` image I picked four points on the road that form a trapezoid around the lane: (585, 460), (203, 720), (1127, 720) and (695, 460).
+These map to a rectangle: (320, 0), (320, 720), (960, 720) and (960, 0).
+With these points, `cv2.getPerspectiveTransform()` gives me the matrix `M` for the bird's-eye view, and `Minv` for going back to the normal view later.
+Then `cv2.warpPerspective()` does the actual warping.
+To check if the points are good, I drew them on the image. On the straight road, the lane lines came out vertical and parallel, so the transform works:
+
+![Warp Example][image4]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
