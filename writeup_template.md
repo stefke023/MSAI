@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 
 [image1]: ./output_images/undistort_output.png "Undistorted"
 [image2]: ./output_images/undistorted_test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
+[image3]: ./output_images/binary_combo_example.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
@@ -62,7 +62,13 @@ I load the camera matrix and distortion coefficients from `calibration.p` and ap
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-TODO: Add your text here!!!
+The code is in `threshold_binary()` in `src/thresholds.py`. I convert the image to HLS and combine two thresholds:
+- Sobel gradient in the x direction on the L channel (20–100), which detects vertical edges of the lane lines.
+- S channel threshold (170–255), which detects yellow and white lines, even in shadow.
+
+A pixel is set to 1 if either condition is true:
+
+![Binary Example][image3]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
