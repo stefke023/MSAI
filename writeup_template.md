@@ -23,7 +23,7 @@ The goals / steps of this project are the following:
 [image2]: ./output_images/undistorted_test1.jpg "Road Transformed"
 [image3]: ./output_images/binary_combo_example.jpg "Binary Example"
 [image4]: ./output_images/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
+[image5]: ./output_images/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
@@ -83,7 +83,15 @@ To check if the points are good, I drew them on the image. On the straight road,
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-TODO: Add your text here!!!
+The code for this step is in `src/lane_finder.py`.
+First I take a histogram of the whole warped binary image, ignoring the outer edges where the barrier and other lanes are.
+The highest peak on each side shows where the left and right lines are.
+Then `find_lane_pixels()` uses 9 sliding windows for each line. Each window collects the white pixels inside it and moves up,
+and if it finds more than 50 pixels it re-centers on their mean x position.
+In `fit_polynomial()` I fit a second order polynomial x = Ay² + By + C to the pixels of each line with `np.polyfit()`.
+For video frames I also wrote `search_around_poly()`, which searches only around the previous fit, so the sliding windows don't have to run every time.
+
+![Fit Visual][image5]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
