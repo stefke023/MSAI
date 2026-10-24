@@ -19,8 +19,8 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
+[image1]: ./output_images/undistort_output.png "Undistorted"
+[image2]: ./output_images/undistorted_test1.jpg "Road Transformed"
 [image3]: ./examples/binary_combo_example.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
@@ -55,7 +55,10 @@ Before and after undistortion:
 
 #### 1. Provide an example of a distortion-corrected image.
 
-TODO: Add your text here!!!
+I load the camera matrix and distortion coefficients from `calibration.p` and apply `cv2.undistort()` in the `undistort()` function in 
+`src/thresholds.py`. The left side is the original image, and the right side is the corrected image:
+
+![Road Transformed][image2]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
