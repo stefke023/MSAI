@@ -39,7 +39,17 @@ You're reading it!
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-TODO: Add your text here!!!
+I wrote the `calibrate_camera()` function in `src/calibration.py`.
+My input was 20 chessboard images with 9x6 inner corners.
+I created an ideal grid of corner points with perfectly even spacing.
+After that, I found all the corners in each photo with `cv2.findChessboardCorners()`,
+compared them to the ideal grid, and `cv2.calibrateCamera()` computed the camera matrix
+and distortion coefficients.
+
+Before and after undistortion:
+
+![Undistorted][image1]
+
 
 ### Pipeline (single images)
 
