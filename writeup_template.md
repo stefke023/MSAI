@@ -95,7 +95,11 @@ For video frames I also wrote `search_around_poly()`, which searches only around
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-TODO: Add your text here!!!
+The code for this step is in `src/measure.py`.
+First I convert the polynomial from pixels to meters, using 3.7 m for the lane width (640 px in the warped image) and 30 m for the visible lane length (720 px).
+In `curvature_radius()` I calculate the radius with R = (1 + (2Ay + B)²)^1.5 / |2A|, at the bottom of the image, right in front of the car.
+In `vehicle_offset()` I find the lane center as the middle point between the two lines at the bottom of the image, and compare it with the image center, where the camera is.
+For `test1.jpg` I got a radius of about 927 m and an offset of -0.14 m, which means the car is 14 cm left of the lane center.
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
