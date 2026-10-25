@@ -4,12 +4,13 @@ import cv2
 from threshold import load_calibration, undistort
 
 SRC = np.float32([[585, 460], [203, 720], [1127, 720], [695, 460]])
+SRC_540P = np.float32([[567, 460], [208, 720], [1134, 720], [727, 460]])
 DST = np.float32([[320, 0], [320, 720], [960, 720], [960, 0]])
 
 
-def get_transform_matrices():
-    M = cv2.getPerspectiveTransform(SRC, DST)
-    Minv = cv2.getPerspectiveTransform(DST, SRC)
+def get_transform_matrices(src=SRC):
+    M = cv2.getPerspectiveTransform(src, DST)
+    Minv = cv2.getPerspectiveTransform(DST, src)
     return M, Minv
 
 
