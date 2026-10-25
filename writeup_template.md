@@ -25,7 +25,6 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/warped_straight_lines.jpg "Warp Example"
 [image5]: ./output_images/color_fit_lines.jpg "Fit Visual"
 [image6]: ./output_images/example_output.jpg  "Output"
-[video1]: ./project_video.mp4 "Video"
 
 ---
 
@@ -114,11 +113,20 @@ At the end I write the radius of curvature and the vehicle position on the image
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-TODO: Add your text here!!!
+The code for the video is in `process_video()` in `src/pipeline.py`.
+The videos are 960x540, so I first resize each frame to 1280x720, the size my calibration and perspective points were made for.
+Then I run the same steps as for single images.
+A new fit is used only if the lane width makes sense at the top, middle and bottom of the warped image.
+The drawn lane is the average of the last 8 good fits, so the lines don't wobble between frames.
+
+Here are my results: [video 1](./output_images/project_video01_output.mp4), [video 2](./output_images/project_video02_output.mp4), [video 3](./output_images/project_video03_output.mp4).
 
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-TODO: Add your text here!!!
+The hardest part was choosing the perspective points. At first my trapezoid followed the road edges instead of the lane lines, so the warped image was full of noise.
+The right line is dashed, so its fit is less reliable than the left one.
+The pipeline will likely fail in sharp curves, strong shadows, with worn out lines, and at night or in rain. It also depends on a fixed camera position.
+To make it more robust, I could use more color spaces, force the lines to be parallel when one has too few pixels, or use a Kalman filter for smoothing.
 
