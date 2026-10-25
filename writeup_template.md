@@ -24,7 +24,7 @@ The goals / steps of this project are the following:
 [image3]: ./output_images/binary_combo_example.jpg "Binary Example"
 [image4]: ./output_images/warped_straight_lines.jpg "Warp Example"
 [image5]: ./output_images/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
+[image6]: ./output_images/example_output.jpg  "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ---
@@ -103,7 +103,12 @@ For `test1.jpg` I got a radius of about 927 m and an offset of -0.14 m, which me
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-TODO: Add your text here!!!
+The code for this step is in `draw_lane()` in `src/draw.py`.
+I fill the area between the two fitted lines with green on an empty image in the bird's-eye view.
+Then I warp it back to the camera view with `Minv` and blend it with the undistorted image using `cv2.addWeighted()`.
+At the end I write the radius of curvature and the vehicle position on the image:
+
+![Output][image6]
 
 ### Pipeline (video)
 
